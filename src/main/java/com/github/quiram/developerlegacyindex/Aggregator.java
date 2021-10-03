@@ -1,5 +1,6 @@
 package com.github.quiram.developerlegacyindex;
 
+import lombok.Getter;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.time.LocalDate;
@@ -12,9 +13,12 @@ import static java.util.stream.Collectors.*;
 
 abstract class Aggregator {
     private final Function<LocalDate, Long> ageFactor;
+    @Getter
+    private final String name;
 
-    Aggregator(Function<LocalDate, Long> ageFactor) {
+    Aggregator(Function<LocalDate, Long> ageFactor, String name) {
         this.ageFactor = ageFactor;
+        this.name = name;
     }
 
     final List<Pair<String, Long>> aggregate(List<Pair<String, LocalDate>> contributions) {

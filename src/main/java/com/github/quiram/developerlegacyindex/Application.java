@@ -2,26 +2,20 @@ package com.github.quiram.developerlegacyindex;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.function.ToLongFunction;
 
-import static java.util.Comparator.comparingLong;
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 class Application {
     static public void main(String[] args) {
         final RepositoryAccess repositoryAccess = new RepositoryAccess(args[0]);
-        final List<Pair<String, Long>> totalContrib = repositoryAccess.getFiles()
+        final List<Pair<String, LocalDate>> contributions = repositoryAccess.getFiles()
                 .stream()
                 .map(repositoryAccess::getContributions)
                 .flatMap(List::stream)
-                .map(Pair::getKey)
-                .collect(groupingBy(identity(), counting()))
-                .entrySet().stream()
-                .map(entry -> Pair.of(entry.getKey(), entry.getValue()))
-                .sorted(comparingLong((ToLongFunction<Pair<String, Long>>) Pair::getValue).reversed())
                 .collect(toList());
-        System.out.println(totalContrib);
+
+        System.out.println(new NonWeightedAggregator().aggregate(contributions));
     }
 }

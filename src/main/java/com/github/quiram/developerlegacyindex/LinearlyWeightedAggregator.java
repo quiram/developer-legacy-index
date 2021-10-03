@@ -4,22 +4,18 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.function.ToLongFunction;
+import java.util.Map;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static java.util.Comparator.comparingLong;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingLong;
 
-class LinearlyWeightedAggregator implements Aggregator {
+class LinearlyWeightedAggregator extends Aggregator {
     @Override
-    public List<Pair<String, Long>> aggregate(List<Pair<String, LocalDate>> contributions) {
+    protected Map<String, Long> aggregateContributions(List<Pair<String, LocalDate>> contributions) {
         return contributions.stream()
                 .map(pair -> Pair.of(pair.getKey(), ageOf(pair.getValue())))
-                .collect(groupingBy(Pair::getKey, summingLong(Pair::getValue)))
-                .entrySet().stream()
-                .map(entry -> Pair.of(entry.getKey(), entry.getValue()))
-                .sorted(comparingLong((ToLongFunction<Pair<String, Long>>) Pair::getValue).reversed())
-                .collect(toList());
+                .collect(groupingBy(Pair::getKey, summingLong(Pair::getValue)));
     }
 
     private long ageOf(LocalDate oldestDate) {

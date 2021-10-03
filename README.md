@@ -1,6 +1,6 @@
 # Developer's Legacy Index
 
-Calculate the relative long-term impact of each individual developer based on git history. This is a scored based on the surviving lines of
+Calculate the relative long-term impact of each individual developer based on git history. This is a score based on the surviving lines of
 code contributed by each developer; a surviving line of code is one that is still present in the current main branch.
 
 Older code _can_ be considered more valuable because it has passed the test of time and it has been providing value in production for

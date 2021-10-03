@@ -9,13 +9,14 @@ import static java.util.stream.Collectors.toList;
 
 class Application {
     static public void main(String[] args) {
-        final RepositoryAccess repositoryAccess = new RepositoryAccess(args[0]);
+        final Options options = new ArgsProcessor().process(args);
+        final RepositoryAccess repositoryAccess = new RepositoryAccess(options.getRepositoryPath());
         final List<Pair<String, LocalDate>> contributions = repositoryAccess.getFiles()
                 .stream()
                 .map(repositoryAccess::getContributions)
                 .flatMap(List::stream)
                 .collect(toList());
 
-        System.out.println(new NonWeightedAggregator().aggregate(contributions));
+        System.out.println(options.getAggregator().aggregate(contributions));
     }
 }

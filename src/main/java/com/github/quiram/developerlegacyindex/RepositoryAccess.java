@@ -26,8 +26,8 @@ class RepositoryAccess {
     private final Repository repository;
 
     @SneakyThrows
-    RepositoryAccess(String projectFolder) {
-        repository = FileRepositoryBuilder.create(new File(projectFolder + "/.git"));
+    RepositoryAccess(String repositoryPath) {
+        repository = FileRepositoryBuilder.create(new File(repositoryPath + "/.git"));
         git = new Git(repository);
     }
 

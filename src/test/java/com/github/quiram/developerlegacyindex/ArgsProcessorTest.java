@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static com.github.quiram.utils.Random.randomString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ArgsProcessorTest {
     private final ArgsProcessor argsProcessor = new ArgsProcessor();
@@ -54,5 +54,17 @@ class ArgsProcessorTest {
         final Exception exception = assertThrows(Exception.class, () -> argsProcessor.process(new String[]{randomString(), "--not-a-real-option"}));
         assertThat(exception.getMessage(), containsString("unknown"));
         assertThat(exception.getMessage(), containsString("--not-a-real-option"));
+    }
+
+    @Test
+    void doNotNormaliseResultAsDefault() {
+        final Options options = argsProcessor.process(new String[]{randomString()});
+        assertFalse(options.isNormalisedResult());
+    }
+
+    @Test
+    void normaliseResultIfRequested() {
+        final Options options = argsProcessor.process(new String[]{randomString(), "--normalise-result"});
+        assertTrue(options.isNormalisedResult());
     }
 }

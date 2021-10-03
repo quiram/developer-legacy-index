@@ -9,4 +9,6 @@ import lombok.Value;
 class Options {
     @NonNull Aggregator aggregator;
     @NonNull String repositoryPath;
+    @Builder.Default
+    boolean normalisedResult = false;
 }

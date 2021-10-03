@@ -27,3 +27,6 @@ hs_err_pid*
 
 # Maven output
 target/
+
+# Shade plugin
+/dependency-reduced-pom.xml

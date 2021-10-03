@@ -19,7 +19,9 @@ class Application {
                 .map(repositoryAccess::getContributions)
                 .flatMap(List::stream)
                 .collect(toList());
+        final List<Pair<String, Long>> legacyIndex = aggregator.aggregate(contributions);
 
-        System.out.println(aggregator.aggregate(contributions));
+        System.out.println("User,Score");
+        legacyIndex.forEach(pair -> System.out.printf("%s,%s%n", pair.getKey(), pair.getValue()));
     }
 }

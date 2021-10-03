@@ -47,6 +47,19 @@ class LinearlyWeightedAggregatorTest {
     }
 
     @Test
+    @DisplayName("Contribution from three days ago counts triple than yesterday's")
+    void yesterdayAndThreeDaysAgoCommit() {
+        List<Pair<String, LocalDate>> contributions = Arrays.asList(
+                Pair.of("user1", LocalDate.now().minusDays(1)),
+                Pair.of("user2", LocalDate.now().minusDays(3))
+        );
+        final List<Pair<String, Long>> result = aggregator.aggregate(contributions);
+        assertThat(result, hasSize(2));
+        assertThat(result, hasItem(Pair.of("user1", 1L)));
+        assertThat(result, hasItem(Pair.of("user2", 3L)));
+    }
+
+    @Test
     void outputIsOrderedByHighestContribution() {
         List<Pair<String, LocalDate>> contributions = Arrays.asList(
                 Pair.of("user1", LocalDate.now().minusDays(1)),

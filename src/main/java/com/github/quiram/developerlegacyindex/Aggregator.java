@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.ToLongFunction;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Comparator.comparingLong;
 import static java.util.stream.Collectors.*;
 
@@ -28,5 +29,9 @@ abstract class Aggregator {
                 .map(entry -> Pair.of(entry.getKey(), entry.getValue()))
                 .sorted(comparingLong((ToLongFunction<Pair<String, Long>>) Pair::getValue).reversed())
                 .collect(toList());
+    }
+
+    protected static long age(LocalDate date) {
+        return DAYS.between(date, LocalDate.now());
     }
 }

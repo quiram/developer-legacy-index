@@ -7,8 +7,9 @@ class ArgsProcessor {
 
         for (String arg : args) {
             switch (arg) {
-                case "--linear-weight" -> optionsBuilder.aggregator(new LinearlyWeightedAggregator());
                 case "--no-weight" -> optionsBuilder.aggregator(new NonWeightedAggregator());
+                case "--linear-weight" -> optionsBuilder.aggregator(new LinearlyWeightedAggregator());
+                case "--exponential-weight" -> optionsBuilder.aggregator(new ExponentiallyWeightedAggregator());
                 default -> {
                     if (arg.startsWith("--")) {
                         throw new RuntimeException("unknown option: " + arg);

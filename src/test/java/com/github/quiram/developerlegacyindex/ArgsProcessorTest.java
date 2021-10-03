@@ -36,6 +36,12 @@ class ArgsProcessorTest {
     }
 
     @Test
+    void useExponentialWeightAggregatorIfOptionSpecified() {
+        final Options options = argsProcessor.process(new String[]{randomString(), "--exponential-weight"});
+        assertThat(options.getAggregator(), is(instanceOf(ExponentiallyWeightedAggregator.class)));
+    }
+
+    @Test
     void supportSpecifyingNonWeightedAggregatorExplicitly() {
         final String repositoryPath = randomString();
         final Options options = argsProcessor.process(new String[]{repositoryPath, "--no-weight"});

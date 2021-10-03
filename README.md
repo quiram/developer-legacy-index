@@ -13,7 +13,7 @@ code.
 ## Build
 
 ```
-mvn clean package
+mvn clean verify
 ```
 
 ## Run

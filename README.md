@@ -21,11 +21,13 @@ mvn clean verify
 ```
 java -jar target/developer-legacy-index-1.0-SNAPSHOT.jar [weight-strategy] [--normalise-result] repository-path
 ```
+where
 
-### Options
-
-`--normalise-result` (optional): make the highest score 1 and adjust all other scores accordingly. Available weighting strategies:
-
+`weight-strategy` is one of:
 - `--no-weight` (default): no weight applied, all surviving lines of code are worth the same.
 - `--linear-weight`: the value of a surviving line increases linearly with age.
 - `--exponential-weight`: the value of a surviving line increases exponentially with age.
+
+`--normalise-result` (optional): make the highest score 1 and adjust all other scores accordingly.
+
+`repository-path`: relative or absolute path to a local git repository.

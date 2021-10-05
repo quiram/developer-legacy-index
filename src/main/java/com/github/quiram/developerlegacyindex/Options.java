@@ -10,6 +10,6 @@ import lombok.experimental.Accessors;
 class Options {
     @NonNull Aggregator aggregator;
     @NonNull String repositoryPath;
-    @Builder.Default boolean normalisedResult = false;
+    @Builder.Default @Accessors(fluent = true) boolean normaliseResult = false;
     @Builder.Default @Accessors(fluent = true) boolean groupByName = false;
 }

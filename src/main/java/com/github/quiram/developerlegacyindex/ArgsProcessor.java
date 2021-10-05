@@ -10,7 +10,7 @@ class ArgsProcessor {
                 case "--no-weight" -> optionsBuilder.aggregator(new NonWeightedAggregator());
                 case "--linear-weight" -> optionsBuilder.aggregator(new LinearlyWeightedAggregator());
                 case "--exponential-weight" -> optionsBuilder.aggregator(new ExponentiallyWeightedAggregator());
-                case "--normalise-result" -> optionsBuilder.normalisedResult(true);
+                case "--normalise-result" -> optionsBuilder.normaliseResult(true);
                 case "--group-by-name" -> optionsBuilder.groupByName(true);
                 default -> {
                     if (arg.startsWith("--")) {

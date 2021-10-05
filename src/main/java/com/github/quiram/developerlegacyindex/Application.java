@@ -13,14 +13,14 @@ class Application {
         final String repositoryPath = options.getRepositoryPath();
         final RepositoryAccess repositoryAccess = new RepositoryAccess(repositoryPath);
         final Aggregator aggregator = options.getAggregator();
-        System.out.printf("Calculating%s long-term contributions in %s applying %s%n", options.isNormalisedResult() ? " normalised" : "", repositoryPath, aggregator.getName());
+        System.out.printf("Calculating%s long-term contributions in %s applying %s%n", options.normaliseResult() ? " normalised" : "", repositoryPath, aggregator.getName());
         final List<Pair<String, LocalDate>> contributions = repositoryAccess.getFiles()
                 .stream()
                 .map(filePath -> repositoryAccess.getContributions(filePath, options.groupByName()))
                 .flatMap(List::stream)
                 .collect(toList());
         final List<Pair<String, Long>> legacyIndex = aggregator.aggregate(contributions);
-        if (options.isNormalisedResult() && !legacyIndex.isEmpty()) {
+        if (options.normaliseResult() && !legacyIndex.isEmpty()) {
             long highestScore = legacyIndex.get(0).getValue();
             legacyIndex.stream()
                     .map(pair1 -> Pair.of(pair1.getKey(), ((double) pair1.getValue()) / highestScore))

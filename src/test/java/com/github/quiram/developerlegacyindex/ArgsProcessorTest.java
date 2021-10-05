@@ -59,13 +59,13 @@ class ArgsProcessorTest {
     @Test
     void doNotNormaliseResultAsDefault() {
         final Options options = argsProcessor.process(new String[]{randomString()});
-        assertFalse(options.isNormalisedResult());
+        assertFalse(options.normaliseResult());
     }
 
     @Test
     void normaliseResultIfRequested() {
         final Options options = argsProcessor.process(new String[]{randomString(), "--normalise-result"});
-        assertTrue(options.isNormalisedResult());
+        assertTrue(options.normaliseResult());
     }
 
     @Test

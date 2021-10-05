@@ -14,8 +14,7 @@ import static java.util.stream.Collectors.*;
 
 abstract class Aggregator {
     private final Function<LocalDate, Long> ageFactor;
-    @Getter
-    private final String name;
+    @Getter private final String name;
 
     Aggregator(Function<LocalDate, Long> ageFactor, String name) {
         this.ageFactor = ageFactor;

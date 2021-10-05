@@ -67,4 +67,16 @@ class ArgsProcessorTest {
         final Options options = argsProcessor.process(new String[]{randomString(), "--normalise-result"});
         assertTrue(options.isNormalisedResult());
     }
+
+    @Test
+    void groupByEmailByDefault() {
+        final Options options = argsProcessor.process(new String[]{randomString()});
+        assertFalse(options.groupByName());
+    }
+
+    @Test
+    void groupByNameIfRequired() {
+        final Options options = argsProcessor.process(new String[]{randomString(), "--group-by-name"});
+        assertTrue(options.groupByName());
+    }
 }

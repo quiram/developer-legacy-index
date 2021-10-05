@@ -19,15 +19,20 @@ mvn clean verify
 ## Run
 
 ```
-java -jar target/developer-legacy-index-1.0-SNAPSHOT.jar [weight-strategy] [--normalise-result] repository-path
+java -jar target/developer-legacy-index-1.0-SNAPSHOT.jar [weight-strategy] [--normalise-result] [--group-by-name] repository-path
 ```
+
 where
 
 `weight-strategy` is one of:
+
 - `--no-weight` (default): no weight applied, all surviving lines of code are worth the same.
 - `--linear-weight`: the value of a surviving line increases linearly with age.
 - `--exponential-weight`: the value of a surviving line increases exponentially with age.
 
 `--normalise-result` (optional): make the highest score 1 and adjust all other scores accordingly.
+
+`--group-by-name` (optional): group contributions using the developer's registered name, as opposed to their email (default). This is useful
+if the developer changed their name at some point during git history (but kept email intact).
 
 `repository-path`: relative or absolute path to a local git repository.

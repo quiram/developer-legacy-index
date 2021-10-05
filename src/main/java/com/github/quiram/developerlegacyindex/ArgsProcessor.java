@@ -11,6 +11,7 @@ class ArgsProcessor {
                 case "--linear-weight" -> optionsBuilder.aggregator(new LinearlyWeightedAggregator());
                 case "--exponential-weight" -> optionsBuilder.aggregator(new ExponentiallyWeightedAggregator());
                 case "--normalise-result" -> optionsBuilder.normalisedResult(true);
+                case "--group-by-name" -> optionsBuilder.groupByName(true);
                 default -> {
                     if (arg.startsWith("--")) {
                         throw new RuntimeException("unknown option: " + arg);

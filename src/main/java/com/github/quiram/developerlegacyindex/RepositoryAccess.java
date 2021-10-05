@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 class RepositoryAccess {
     private final Git git;
@@ -60,7 +61,8 @@ class RepositoryAccess {
     }
 
     @SneakyThrows
-    List<Pair<String, LocalDate>> getContributions(String filePath) {
+    List<Pair<String, LocalDate>> getContributions(String filePath, boolean groupByName) {
+        Function<PersonIdent, String> identifying = groupByName ? PersonIdent::getName : p -> p.getEmailAddress().toLowerCase();
         final BlameResult blameResult = git.blame()
                 .setFilePath(filePath)
                 .call();
@@ -69,7 +71,7 @@ class RepositoryAccess {
         while (true) {
             try {
                 final PersonIdent sourceAuthor = blameResult.getSourceAuthor(index++);
-                result.add(Pair.of(sourceAuthor.getEmailAddress().toLowerCase(), sourceAuthor.getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+                result.add(Pair.of(identifying.apply(sourceAuthor), sourceAuthor.getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
             } catch (ArrayIndexOutOfBoundsException e) {
                 break;
             }

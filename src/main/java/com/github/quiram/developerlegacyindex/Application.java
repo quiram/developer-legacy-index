@@ -16,7 +16,7 @@ class Application {
         System.out.printf("Calculating%s long-term contributions in %s applying %s%n", options.isNormalisedResult() ? " normalised" : "", repositoryPath, aggregator.getName());
         final List<Pair<String, LocalDate>> contributions = repositoryAccess.getFiles()
                 .stream()
-                .map(repositoryAccess::getContributions)
+                .map(filePath -> repositoryAccess.getContributions(filePath, options.groupByName()))
                 .flatMap(List::stream)
                 .collect(toList());
         final List<Pair<String, Long>> legacyIndex = aggregator.aggregate(contributions);

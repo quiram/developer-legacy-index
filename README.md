@@ -35,6 +35,6 @@ where
 `--normalise-result` (optional): make the highest score 1 and adjust all other scores accordingly.
 
 `--group-by-name` (optional): group contributions using the developer's registered name, as opposed to their email (default). This is useful
-if the developer changed their name at some point during git history (but kept email intact).
+if the developer changed their email at some point during git history (but kept name intact).
 
 `repository-path`: relative or absolute path to a local git repository.

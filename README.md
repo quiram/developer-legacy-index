@@ -8,7 +8,7 @@ longer, some strategies to account for this are available. The absolute score is
 developers. Consider using a normalised result if you want to compare scores across repositories.
 
 Multiple factors can affect the validity of the score (technical debt, development practices, etc.), so take these results with a pinch of
-code.
+salt.
 
 To learn more read the [article](https://www.javaadvent.com/2021/12/using-jgit-to-analyse-the-legacy-of-individual-developers.html) and/or watch the [presentation](https://youtu.be/kvn3NY5_ITQ).
 
